@@ -1,30 +1,17 @@
 <template>
   <div>
-    <h1 class="text-blue-600 text-4xl mb-10">Algorithm visualizer</h1>
-    <div class="interface flex justify-center gap-36 mb-10">
-      <div>
-        <h2 class="mb-6 text-2xl">Mix blocks</h2>
-        <Button @click="packArray">Mix up</Button>
-      </div>
-      <div>
-        <h2 class="mb-6 text-2xl">Choose speed</h2>
-        <input
-          class="input input-bordered input-primary w-full max-w-xs"
-          type="number"
-          v-model="value"
+    <h1 class="sort_header text-blue-600 text-4xl mb-10">Algorithm visualizer</h1>
+    <div class="sort_interface flex justify-center gap-36 mb-10">
+      <MixArr @pack="packArray" />
+      <SpeedSet v-model="value" />
+        <Algorithms
+        @bubble="bubbleSort"
+        @insert="insertionSort"
+        @select="selectionSort"
         />
-      </div>
-      <div class="algorithms mb-10">
-        <h2 class="mb-6 text-2xl">Choose Algorithm</h2>
-        <div class="flex justify-center gap-6">
-          <Button @click="bubbleSort">Bubble Sort</Button>
-          <Button @click="insertionSort">Insertion Sort</Button>
-          <Button @click="selectionSort">Selection Sort</Button>
-        </div>
-      </div>
     </div>
     <div class="sort_container w-full fixed border rounded-xl border-blue-600 bg-blue-100 py-5">
-      <SortingElement
+      <Bar
         class="bar bg-blue-700"
         v-for="(num, i) in array"
         :key="i"
@@ -35,11 +22,17 @@
 </template>
 <script>
 import Button from '@/components/UI/Button.vue';
-import SortingElement from '@/components/UI/SortingElement.vue';
+import Bar from '@/components/UI/Bar.vue';
+import MixArr from '@/components/MixArr.vue';
+import SpeedSet from '@/components/SpeedSet.vue';
+import Algorithms from '@/components/Algorithms';
 export default {
   components: {
     Button,
-    SortingElement,
+    Bar,
+    MixArr,
+    SpeedSet,
+    Algorithms,
   },
   name: 'App',
   data() {
@@ -120,4 +113,3 @@ export default {
   },
 };
 </script>
-<style></style>
