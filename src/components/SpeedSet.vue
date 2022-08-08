@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="mb-6 text-2xl">Choose speed</h2>
+    <h2 class="mb-6 text-2xl">Замедлите</h2>
     <Input :value = "modelValue" @input = "updateInput" type="number" placeholder="0" />
   </div>
 </template>

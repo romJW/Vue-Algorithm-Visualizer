@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="sort_header text-blue-600 text-4xl mb-10">Algorithm visualizer</h1>
+    <h1 class="sort_header text-blue-600 text-4xl mb-10">Визуализация Алгоритмов</h1>
     <div class="sort_interface flex justify-center gap-36 mb-10">
       <MixArr @pack="packArray" />
       <SpeedSet v-model="value" />
@@ -13,7 +13,7 @@
     <div class="sort_container w-full fixed border rounded-xl border-blue-600 bg-blue-100 py-5">
       <Bar
         class="bar bg-blue-700"
-        v-for="(num, i) in array"
+        v-for="(num, i) in arr"
         :key="i"
         :style="{ height: num + 'px' }"
       />
@@ -37,16 +37,16 @@ export default {
   name: 'App',
   data() {
     return {
-      array: [],
-      size: 30,
+      arr: [],
+      amount: 30,
       value: 0,
     };
   },
   methods: {
     packArray() {
-      this.array = [];
-      for (let i = 0; i < this.size; i++) {
-        this.array.push(this.ranodomizeNumber(300, 750));
+      this.arr = [];
+      for (let i = 0; i < this.amount; i++) {
+        this.arr.push(this.ranodomizeNumber(300, 750));
       }
     },
     ranodomizeNumber(min, max) {
@@ -56,11 +56,11 @@ export default {
       let picked;
       do {
         picked = false;
-        for (let i = 0; i < this.array.length; i++) {
-          if (this.array[i] > this.array[i + 1]) {
-            let prev = this.array[i];
-            this.array[i] = this.array[i + 1];
-            this.array[i + 1] = prev;
+        for (let i = 0; i < this.arr.length; i++) {
+          if (this.arr[i] > this.arr[i + 1]) {
+            let prev = this.arr[i];
+            this.arr[i] = this.arr[i + 1];
+            this.arr[i + 1] = prev;
             await this.delay();
             picked = true;
           }
@@ -71,10 +71,10 @@ export default {
       let picked;
       do {
         picked = false;
-        for (let i = 1; i < this.array.length; i++) {
+        for (let i = 1; i < this.arr.length; i++) {
           for (let j = i - 1; j > -1; j--) {
-            if (this.array[j + 1] < this.array[j]) {
-              [this.array[j + 1], this.array[j]] = [this.array[j], this.array[j + 1]];
+            if (this.arr[j + 1] < this.arr[j]) {
+              [this.arr[j + 1], this.arr[j]] = [this.arr[j], this.arr[j + 1]];
               await this.delay();
               picked = true;
             }
@@ -87,17 +87,17 @@ export default {
       let min;
       do {
         picked = false;
-        for (let i = 0; i < this.array.length; i++) {
+        for (let i = 0; i < this.arr.length; i++) {
           min = i;
-          for (let j = i + 1; j < this.array.length; j++) {
-            if (this.array[j] < this.array[min]) {
+          for (let j = i + 1; j < this.arr.length; j++) {
+            if (this.arr[j] < this.arr[min]) {
               min = j;
               await this.delay();
               picked = true;
             }
           }
           if (min !== i) {
-            [this.array[i], this.array[min]] = [this.array[min], this.array[i]];
+            [this.arr[i], this.arr[min]] = [this.arr[min], this.arr[i]];
             await this.delay();
             picked = true;
           }
